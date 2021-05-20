@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaurang Web Worker</title>
+</head>
+
+
+<body>
+<!-- <script id="gaurangWorker" type="javascript/worker">
+    
+    let data;
+    self.onmessage = (e)=>{
+        data = e.data;
+    }
+    let numberData = Number(data);
+    if(numberData>2000000000)
+    {
+        alert("The Number You Have Inputted Is Too High");
+    }
+    for(let i =0;i<numberData;i++)
+    {
+        if(i%4==0)
+        {
+            console.log(i);
+        }
+
+    }
+
+    alert("The Worker Has Finished Printing To The Console")
+
+
+
+
+</script> -->
+
+Enter Number: &emsp;&emsp; <input type="number" id="inputData">
+
+<button onclick="startWorker()">Start Worker</button>
+
+
+<script>
+
+    var worker  = new Worker('worker.js');
+    function startWorker()
+    {
+        var data = document.getElementById('inputData').value;
+        
+        worker.postMessage(data);
+           worker.onmessage = function(e){
+
+                        if(e.data==='DONE')
+                        {
+                                    alert(e.data);
+                        }
+                        else
+                        {
+                            console.log(e.data);
+                        }
+                        
+             }
+
+
+
+
+
+    }
+
+
+ 
+
+
+
+
+</script>
+
+    
+</body>
+</html>
